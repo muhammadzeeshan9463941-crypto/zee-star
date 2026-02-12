@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubai Grocery Online</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background-color: #28a745; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; }
+        .product { display: inline-block; width: 30%; margin: 10px; padding: 10px; border: 1px solid #ddd; text-align: center; }
+        button { background-color: #007bff; color: white; border: none; padding: 10px; cursor: pointer; }
+        #cart { margin-top: 20px; }
+        #checkout { display: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Dubai Grocery Online</h1>
+        <p>Fresh groceries delivered to your door in Dubai!</p>
+    </header>
+    <div class="container">
+        <h2>Products</h2>
+        <div id="products">
+            <div class="product">
+                <h3>Apples</h3>
+                <p>AED 10/kg</p>
+                <button onclick="addToCart('Apples', 10)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <h3>Bananas</h3>
+                <p>AED 8/kg</p>
+                <button onclick="addToCart('Bananas', 8)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <h3>Milk</h3>
+                <p>AED 5/liter</p>
+                <button onclick="addToCart('Milk', 5)">Add to Cart</button>
+            </div>
+            <!-- Add more products as needed -->
+        </div>
+        <div id="cart">
+            <h2>Your Cart</h2>
+            <ul id="cartItems"></ul>
+            <p>Total: AED <span id="total">0</span></p>
+            <button onclick="showCheckout()">Checkout</button>
+        </div>
+        <div id="checkout">
+            <h2>Checkout</h2>
+            <p>Select Payment Method:</p>
+            <button onclick="payWithPayPal()">Pay with PayPal</button>
+            <button onclick="payWithCard()">Pay with Visa/Mastercard</button>
+            <p>Delivery in Dubai: AED 10 (free over AED 50)</p>
+        </div>
+    </div>
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.item} - AED ${item.price}`;
+                cartItems.appendChild(li);
+            });
+            document.getElementById('total').textContent = total;
+        }
+
+        function showCheckout() {
+            document.getElementById('checkout').style.display = 'block';
+        }
+
+        function payWithPayPal() {
+            // Integrate PayPal SDK here (replace with actual code)
+            alert('Redirecting to PayPal... (Implement SDK for real payments)');
+            // Example: Use PayPal Buttons API
+        }
+
+        function payWithCard() {
+            // Integrate card payment (e.g., Stripe or Network International)
+            alert('Processing card payment... (Implement gateway for real payments)');
+        }
+    </script>
+</body>
+</html>
